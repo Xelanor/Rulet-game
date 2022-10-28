@@ -6,15 +6,43 @@
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
+    "@typescript-eslint/eslint-plugin": "^4.16.1",
+    "@typescript-eslint/parser": "^4.16.1",
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
+    "babel-loader": "8.1.0",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-plugin-transform-react-jsx": "^6.24.1",
+    "babel-preset-env": "^1.7.0",
+    "classnames": "^2.3.1",
+    "css-loader": "^3.5.3",
+    "eslint": "^7.21.0",
+    "eslint-config-airbnb-typescript-prettier": "^2.1.1",
+    "eslint-plugin-react": "^7.22.0",
+    "husky": "^4.2.5",
+    "jest-canvas-mock": "^2.2.0",
+    "prettier": "^2.0.5",
     "react": "^18.2.0",
+    "react-custom-roulette": "^1.2.0",
     "react-dom": "^18.2.0",
     "react-scripts": "5.0.1",
-    "web-vitals": "^2.1.4"
+    "react-sound": "^1.2.0",
+    "styled-components": "^5.1.1",
+    "ts-loader": "8.0.7",
+    "typescript": "^4.2.2",
+    "url-loader": "^4.1.0",
+    "use-sound": "^4.0.1",
+    "web-vitals": "^2.1.4",
+    "webpack": "4.44.2",
+    "webpack-cli": "^3.3.11",
+    "webpack-dev-server": "3.11.1"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
+    "css": "tailwindcss build ./src/styles/tailwind.css -o ./src/styles/tailwind.generated.css",
+    "watch": "cross-env TAILWIND_MODE=watch postcss ./src/styles/tailwind.css -o ./src/styles/tailwind.generated.css -w",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -34,5 +62,12 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "autoprefixer": "^9.0.0",
+    "cross-env": "^7.0.3",
+    "postcss": "^8.3.5",
+    "postcss-cli": "^8.3.1",
+    "tailwindcss": "^2.2.4"
   }
 }
