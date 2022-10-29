@@ -111,9 +111,11 @@ function App() {
   });
   const [playNoMoreBets] = useSound(noMoreBets, { volume: 1.5 });
   const [warningPlayed, setWarningPlayed] = useState(false);
+  const [showWinningState, setShowWinningState] = useState(false);
 
   const handleSpinClick = () => {
     if (!warningPlayed) {
+      setShowWinningState(false);
       let audio = new Audio(placeYourBets);
       audio.play();
       setWarningPlayed(true);
@@ -273,6 +275,72 @@ function App() {
           "bg-red-400": !warningPlayed,
         })}
       ></div>
+      {showWinningState && (
+        <div className="absolute w-full py-4 bg-black/50 z-50">
+          <div className="text-gray-100 mb-2 text-xl font-bold">
+            The Winning Number Is
+          </div>
+          <div className="flex h-full justify-center items-center">
+            <div
+              className={classNames(
+                "text-white flex justify-center items-center my-0.5 h-14 w-14 text-4xl font-bold leading-3 rounded-md shadow-lg opacity-70",
+                {
+                  "bg-[#000000]":
+                    prizeNumber === 0
+                      ? data[data.length - 1].style.backgroundColor ===
+                        "#000000"
+                      : data[prizeNumber - 1].style.backgroundColor ===
+                        "#000000",
+                  "bg-[#FF0000]":
+                    prizeNumber === 0
+                      ? data[data.length - 1].style.backgroundColor ===
+                        "#FF0000"
+                      : data[prizeNumber - 1].style.backgroundColor ===
+                        "#FF0000",
+                }
+              )}
+            >
+              {prizeNumber === 0
+                ? data[data.length - 1].option
+                : data[prizeNumber - 1].option}
+            </div>
+            <div
+              className={classNames(
+                "text-white flex justify-center items-center my-0.5 h-20 w-20 text-6xl font-bold leading-3 rounded-md shadow-lg",
+                {
+                  "bg-[#000000]":
+                    data[prizeNumber].style.backgroundColor === "#000000",
+                  "bg-[#FF0000]":
+                    data[prizeNumber].style.backgroundColor === "#FF0000",
+                }
+              )}
+            >
+              {data[prizeNumber].option}
+            </div>
+            <div
+              className={classNames(
+                "text-white flex justify-center items-center my-0.5 h-14 w-14 text-4xl font-bold leading-3 rounded-md shadow-lg opacity-70",
+                {
+                  "bg-[#000000]":
+                    prizeNumber === 37
+                      ? data[0].style.backgroundColor === "#000000"
+                      : data[prizeNumber + 1].style.backgroundColor ===
+                        "#000000",
+                  "bg-[#FF0000]":
+                    prizeNumber === 37
+                      ? data[0].style.backgroundColor === "#FF0000"
+                      : data[prizeNumber + 1].style.backgroundColor ===
+                        "#FF0000",
+                }
+              )}
+            >
+              {prizeNumber === 37
+                ? data[0].option
+                : data[prizeNumber + 1].option}
+            </div>
+          </div>
+        </div>
+      )}
       <div className="App flex justify-center space-x-16 mb-0">
         <div className="flex relative">
           <Wheel
@@ -294,6 +362,7 @@ function App() {
             textDistance={textDistance}
             onStopSpinning={() => {
               setMustSpin(false);
+              setShowWinningState(true);
               let audio = new Audio(data[prizeNumber].sound);
               audio.play();
               let newWinningNumbers = [...winningNumbers];
